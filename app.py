@@ -1,6 +1,10 @@
 from flask import Flask, render_template,request, redirect, url_for, jsonify, json
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+	return render_template('index.html')
+
 @app.route('/text')
 def text():
     return '<html><body><h1>Hello World</h1></body></html>'
@@ -90,4 +94,4 @@ def setDataMessage():
         return jsonify(result='OK')
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', debug=True)
+    app.run('0.0.0.0')

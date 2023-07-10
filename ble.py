@@ -3,7 +3,8 @@ from bleak import BleakScanner, BleakClient
 
 async def scan_devices():
     devices = await BleakScanner.discover()
-    for device in devices:
+    filtered_devices = list(filter(lambda device: device.name != None, devices))
+    for device in filtered_devices:
         print(device)
 
 async def connect_to_device(device_address):
