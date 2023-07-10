@@ -1,4 +1,5 @@
 from flask import Flask, render_template,request, redirect, url_for, jsonify, json
+from werkzeug.debug import DebuggedApplication
 app = Flask(__name__)
 
 @app.route('/')
@@ -94,4 +95,6 @@ def setDataMessage():
         return jsonify(result='OK')
 
 if __name__ == '__main__':
-    app.run('0.0.0.0')
+    app.debug = True
+    app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
+    app.run('0.0.0.0',debug=true)
