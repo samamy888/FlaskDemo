@@ -1,0 +1,6 @@
+{
+    "data": [
+      {"account":"root","password":"1234","admin":true},
+      {"account":"user","password":"1234","admin":false}
+    ]
+}
