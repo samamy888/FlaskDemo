@@ -1,8 +1,10 @@
 from flask import Flask, render_template,request, redirect, url_for, jsonify, abort , json, session, flash, abort
+
 from app import app
 
 @app.route('/')
 def index():
+    # schedule_task.apply_async(countdown=10, repeat=True)
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
@@ -23,6 +25,20 @@ def logout():
     session['admin'] = False
     return redirect(url_for('index'))
 
+@app.route('/loginAction', methods=['POST'])
+def loginAction():
+    error = None
+    data = request.get_json()
+    if data['account'] != 'admin' or data['password'] != 'admin':
+        error = 'Invalid Credentials. Please try again.'
+        abort_with_error(401, error)
+    else:
+        print(data)
+        session['logged_in'] = True
+        session['accountId'] = data['account']
+        session['admin'] = True
+        flash('Successful login.')
+        return jsonify()
 
 @app.errorhandler(400)
 @app.errorhandler(401)
