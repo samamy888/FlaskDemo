@@ -8,16 +8,17 @@
 </head>
 
 <body>
-    <div id="app">
-        <el-menu class="navbar" mode="horizontal" background-color="#D9D9D9" text-color="#fff"
-            active-text-color="#ffd04b">
-            <el-menu-item index="1">处理中心</el-menu-item>
-            <el-menu-item index="1">处理中心2</el-menu-item>
-        </el-menu>
+    <div id="app" v-cloak>
+        <div class="navbar">
+            <div>
+                <div>Test</div>
+                <i class="el-icon-s-home"></i>
+            </div>
+        </div>
         <div class="menu">
             <el-row>
                 <el-col :span="3">
-                    <el-menu default-active="1" mode="'vertical'" class="el-menu-vertical" background-color="#7B86E3"
+                    <el-menu :default-active="menuActive" mode="'vertical'" class="el-menu-vertical" background-color="#7B86E3"
                         text-color="#fff" active-text-color="#ffd04b">
                         <el-menu-item index="1" @click="goTo('/')">
                             <i class="el-icon-s-home"></i>
@@ -29,7 +30,13 @@
                                 資料轉移
                             </span>
                         </el-menu-item>
-                        <el-menu-item index="3">
+                        <el-menu-item index="3" @click="goTo('/scanner')">
+                            <i class="el-icon-s-tools"></i>
+                            <span slot="title">
+                                Scanner
+                            </span>
+                        </el-menu-item>
+                        <el-menu-item index="4">
                             <i class="el-icon-s-data"></i>
                             <span slot="title">VPA_Analzer</span>
                         </el-menu-item>
@@ -68,6 +75,12 @@
         right: 0;
         height: 3.5rem;
         z-index: 10;
+        background-color: #D9D9D9;
+        width: 100%;
+    }
+
+    .navbar div{
+        width: 30%;
     }
 
     .el-menu-vertical {
@@ -85,24 +98,40 @@
     .el-menu-vertical {
         height: 100%;
     }
+
+    [v-cloak] {
+        display: none;
+    }
 </style>
 <!-- import Vue before Element -->
 <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
+    const menuList = ['/','/data','/scanner']
     const vueData = {
-        test: '123'
+        test: '123',
+        menuActive : '2',
     }
     const methods = {
         goTo: (url) => {
             window.location.href = url;
+        },
+        setMenuActive: function(){
+            let index = menuList.findIndex(x=>x==location.pathname)
+            console.log(index)
+            this.menuActive = String(index + 1);
         }
+    }
+    const mounted = function(){
+        this.$el.removeAttribute('v-cloak');
+        this.setMenuActive();
     }
     const vue = {
         el: '#app',
         data: vueData,
         methods: methods,
+        mounted: mounted,
     }
     const vm = new Vue(vue)
 </script>

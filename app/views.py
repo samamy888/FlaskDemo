@@ -18,6 +18,10 @@ def login():
 def data():
     return render_template('data.html')
 
+@app.route('/scanner')
+def scanner():
+    return render_template('scanner.html')
+
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
