@@ -5,7 +5,9 @@ async def scan_devices():
     devices = await BleakScanner.discover()
     filtered_devices = list(filter(lambda device: device.name != None, devices))
     for device in filtered_devices:
-        print(device)
+        rssi = device.details.adv.raw_signal_strength_in_d_bm
+        print(f"Device: {device.name}, RSSI: {rssi}")
+
 
 async def connect_to_device(device_address):
     async with BleakClient(device_address) as client:
