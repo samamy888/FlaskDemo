@@ -1,6 +1,14 @@
 {
-    "data": [
-      {"account":"root","password":"1234","admin":true},
-      {"account":"user","password":"1234","admin":false}
-    ]
+  "data": [
+    {
+      "account": "admin",
+      "password": "admin",
+      "admin": true
+    },
+    {
+      "account": "user",
+      "password": "user",
+      "admin": false
+    }
+  ]
 }

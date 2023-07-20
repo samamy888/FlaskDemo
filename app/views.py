@@ -22,26 +22,28 @@ def data():
 def scanner():
     return render_template('scanner.html')
 
-@app.route("/logout")
+@app.route("/logout", methods=['GET'])
 def logout():
     session['logged_in'] = False
     session['accountId'] = None
     session['admin'] = False
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/loginAction', methods=['POST'])
 def loginAction():
     error = None
     data = request.get_json()
+    # with open('static/data/account.json', 'r') as f:
+    #         data = json.load(f)
+    #         print("text : ", data)
     if data['account'] != 'admin' or data['password'] != 'admin':
-        error = 'Invalid Credentials. Please try again.'
+        error = '帳密錯誤'
         abort_with_error(401, error)
     else:
         print(data)
         session['logged_in'] = True
         session['accountId'] = data['account']
         session['admin'] = True
-        flash('Successful login.')
         return jsonify()
 
 @app.errorhandler(400)
