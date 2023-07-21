@@ -79,8 +79,9 @@
     const methods = {
         onSubmit() {
             axios.post(`/loginAction`, this.form)
-                .then(function () {
+                .then(function ({data}) {
                     window.location.href = '/';
+                    localStorage.setItem('accountId',data)
                 }, function (ex) {
                     console.error(ex.response.data.error);
                     vm.showError(ex.response.data.error);

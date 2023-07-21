@@ -36,7 +36,7 @@ def loginAction():
     # with open('static/data/account.json', 'r') as f:
     #         data = json.load(f)
     #         print("text : ", data)
-    if data['account'] != 'admin' or data['password'] != 'admin':
+    if (data['account'] != 'admin' or data['password'] != 'admin') and (data['account'] != 'user' or data['password'] != 'user'):
         error = '帳密錯誤'
         abort_with_error(401, error)
     else:
@@ -44,7 +44,7 @@ def loginAction():
         session['logged_in'] = True
         session['accountId'] = data['account']
         session['admin'] = True
-        return jsonify()
+        return jsonify(data['account'])
 
 @app.errorhandler(400)
 @app.errorhandler(401)

@@ -10,7 +10,7 @@
 <body>
     <div id="app" v-cloak>
         <el-header class="navbar">
-            <div>Test</div>
+            <div v-text="accountId"></div>
             <el-image :src="imageSrc" @click="logout()"></el-image>
         </el-header>
         <div class="menu">
@@ -58,7 +58,7 @@
     }
 
     body div {
-        height: 100%;
+        height: 90%;
     }
 
     .container {
@@ -119,6 +119,7 @@
         test: '123',
         menuActive: '2',
         imageSrc :'../static/logout.png',
+        accountId:'test'
     }
     const methods = {
         goTo: (url) => {
@@ -126,7 +127,6 @@
         },
         setMenuActive: function () {
             let index = menuList.findIndex(x => x == location.pathname)
-            console.log(index)
             this.menuActive = String(index + 1);
         },
         logout:()=>{
@@ -151,6 +151,8 @@
     const mounted = function () {
         this.$el.removeAttribute('v-cloak');
         this.setMenuActive();
+        let account = localStorage.getItem('accountId')
+        this.accountId = account
     }
     const vue = {
         el: '#app',
