@@ -45,6 +45,7 @@ def testDBListDetail():
     connecting = f'mysql+pymysql://{dbListExist.Account}:{dbListExist.Password}@{dbListExist.IP}:{dbListExist.Port}/'
     print(connecting)
     try :
+        ## 要用連線到的字串去創建新的表
         db.create_all()
         data = tempTable('1')
         db.session.add(data)
