@@ -5,16 +5,6 @@ flask練習
 ```
 $ pip install -r requirements.txt
 ```
-啟動程式
-```
-$ python app.py     
-$ celery -A celery_worker.celery worker --loglevel=info --pool=solo
-$ celery -A celery_worker.celery beat -l info -s log/celerybeat-schedule
-$ flower -A celery_worker.celery --port=5555
-```
-
-
-
 
 [教學](https://devs.tw/post/448)
 [celery教學demo](https://github.com/a607ernie/flask-celery-demo)
